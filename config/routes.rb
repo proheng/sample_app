@@ -1,12 +1,16 @@
 SampleApp::Application.routes.draw do
-  # The priority is based upon order of creation:
+  get "pages/home"
+
+  get "pages/contact"
+
   # first created -> highest priority.
+  # 
+  #   The priority is based upon order of creation:
+  #     match 'products/:id' => 'catalog#view'
+  #   Keep in mind you can assign values other than :controller and :action
+  #   Sample of regular route:
+  #   Sample of named route:
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
