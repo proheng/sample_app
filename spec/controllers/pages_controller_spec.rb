@@ -11,7 +11,7 @@ describe PagesController do
     
     it "Res says 'it should have the right title'" do
       get 'home'
-      response.should have_selector("title",:content => "Ruby on Rails Tutorial Sample App | Home")
+      response.should have_selector("title",:content => "Rex Ruby on Rails Learning")
     end
     
     it "should not have empty body" do 
@@ -27,7 +27,7 @@ describe PagesController do
     end
     it "Res says 'it should have the right title'" do
        get 'contact'
-       response.should have_selector("title",:content => "Ruby on Rails Tutorial Sample App | Contact")
+       response.should have_selector("title",:content => "Rex Ruby on Rails Learning")
     end
   end
 
@@ -38,7 +38,7 @@ describe PagesController do
     end
     it "Res says 'it should have the right title'" do
        get 'about'
-       response.should have_selector("title",:content => "Ruby on Rails Tutorial Sample App | About")
+       response.should have_selector("title",:content => "Rex Ruby on Rails Learning")
     end
   end
   
