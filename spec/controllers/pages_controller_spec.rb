@@ -1,11 +1,22 @@
 require 'spec_helper'
 
 describe PagesController do
-
-  describe "GET 'home'" do
+  render_views
+  
+  describe "GET Rex's  'home' page" do
     it "returns http success" do
-      get 'home'
+      get 'home' # actual function syntax
       response.should be_success
+    end
+    
+    it "Res says 'it should have the right title'" do
+      get 'home'
+      response.should have_selector("title",:content => "Ruby on Rails Tutorial Sample App | Home")
+    end
+    
+    it "should not have empty body" do 
+      get 'home'
+      response.body.should_not =~ /<body>\s*<\/body>/ # This is use regular expression. =~ is match
     end
   end
 
@@ -14,6 +25,21 @@ describe PagesController do
       get 'contact'
       response.should be_success
     end
+    it "Res says 'it should have the right title'" do
+       get 'contact'
+       response.should have_selector("title",:content => "Ruby on Rails Tutorial Sample App | Contact")
+    end
   end
 
+  describe "Rex to GET 'about'" do
+    it "returns http success" do
+      get 'about'
+      response.should be_success
+    end
+    it "Res says 'it should have the right title'" do
+       get 'about'
+       response.should have_selector("title",:content => "Ruby on Rails Tutorial Sample App | About")
+    end
+  end
+  
 end
