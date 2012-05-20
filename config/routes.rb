@@ -1,9 +1,22 @@
 SampleApp::Application.routes.draw do
+
+  
+  # root :to => 'pages#home'
+  match '/', :to => "pages#home" # can user link_to 'name shown', home_path the namving convention is  controller_name#action
+  match '/home', :to => "pages#home" # the namving convention is  controller_name#action
+  match '/contact', :to => "pages#contact" # the namving convention is  controller_name#action
+  match '/about', :to => "pages#about" # the namving convention is  controller_name#action
+  match '/help', :to => "pages#help" # the namving convention is  controller_name#action   
+
+
   get "pages/home"
 
   get "pages/contact"
 
   get "pages/about"
+  
+  get "pages/help"
+  
   
   # first created -> highest priority.
   # 
@@ -51,10 +64,6 @@ SampleApp::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
