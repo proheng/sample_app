@@ -1,3 +1,16 @@
+class User < ActiveRecord::Base
+	attr_accessible :email, :name
+
+
+	validates :name, 	:presence => true,
+						:length	  => { :maximum => 50 }
+
+	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i #http://rubular.com/
+	validates :email,   :presence 	=> true,
+    					:format   	=> { :with => email_regex },
+    					:uniqueness => { :case_sensitive => false }
+
+end
 # == Schema Information
 #
 # Table name: users
@@ -8,7 +21,4 @@
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #
-class User < ActiveRecord::Base
-  attr_accessible :email, :name
-end
 
