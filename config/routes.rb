@@ -8,6 +8,8 @@ SampleApp::Application.routes.draw do
   match '/help', :to => "pages#help" # the namving convention is  controller_name#action   
   match '/signup', :to => "users#new" 
 
+  resources :users
+
   get "pages/home"
   
   get "pages/contact"
