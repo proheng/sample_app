@@ -64,6 +64,15 @@ describe User do
 		user_with_duplicate_email.should_not be_valid
 	end
 
+	describe "password" do
+		it "should have a password attribute" do
+			User.new(@attr).should respond_to :password
+		end
+		it "should have a password attribute" do
+			User.new(@attr).methods.index(:password).should_not be_nil
+		end
+	end
+
 end
 # == Schema Information
 #

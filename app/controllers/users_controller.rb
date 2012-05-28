@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@user = User.find_by_id params[:id]
+  	@user = User.find_by_id params[:id] # params is http request data 
+  	#for debug on params, refer to application.html.erb
   end
 end
