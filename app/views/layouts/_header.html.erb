@@ -1,7 +1,10 @@
 <header>
+
 	<div id="logo">
-		<%= link_to( logo, root_path) %>	
+		<%= link_to(logo, root_path) %>	
 	</div>
+	<h5><%= ApplicationHelper::TITLE_HELP %></h5>
+	<h5><%= PagesHelper::TITLE_HELP %></h5>
 	<nav class="round">
 		<ul>
 			<li><%= link_to "Home", root_path %></li>

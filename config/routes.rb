@@ -8,13 +8,13 @@ SampleApp::Application.routes.draw do
   match '/help', :to => "pages#help" # the namving convention is  controller_name#action   
   match '/signup', :to => "users#new" 
 
-  # get "pages/home"
-  # 
-  # get "pages/contact"
-  # 
-  # get "pages/about"
-  # 
-  # get "pages/help"
+  get "pages/home"
+  
+  get "pages/contact"
+  
+  get "pages/about"
+  
+  get "pages/help"
   
   
   # first created -> highest priority.
