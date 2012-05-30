@@ -1,12 +1,12 @@
 SampleApp::Application.routes.draw do
 
   root :to => 'pages#home'
-#  match '/', :to => "pages#home" # can user link_to 'name shown', home_path the namving convention is  controller_name#action
+# match '/', :to => "pages#home" # can user link_to 'name shown', home_path the namving convention is  controller_name#action
 # match '/home', :to => "pages#home" # the namving convention is  controller_name#action
   match '/contact', :to => "pages#contact" # the namving convention is  controller_name#action
-  match '/about', :to => "pages#about" # the namving convention is  controller_name#action
-  match '/help', :to => "pages#help" # the namving convention is  controller_name#action   
-  match '/signup', :to => "users#new" 
+  match '/about',   :to => "pages#about"  # the namving convention is  controller_name#action
+  match '/help',    :to => "pages#help" # the namving convention is  controller_name#action   
+  match '/signup',  :to => "users#new" 
 
   resources :users
 
