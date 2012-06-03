@@ -1,1 +1,23 @@
-<%= @user.name %>, <%= @user.email %>
+<table class="profile" summary="Profile Information">
+	<tr>
+		<td class="main">
+			<h1>
+				<%= gravatar_for @user_controller, :size => 100 %>
+				<%= @user_controller.name %>
+			</h1>
+		</td>
+		<td class="sidebar round"> 
+			<strong>
+				Name <%= @user_controller.email %>  		
+			</strong>
+			<strong>
+				URL <%= link_to "/users/#{@user_controller.id}" %>
+
+				<%= link_to user_path(@user_controller.id) %>
+				<%= link_to user_path(@user_controller) %> 
+			</strong>
+		</td>
+	</tr>
+</table>
+
+

@@ -1,5 +1,7 @@
 SampleApp::Application.routes.draw do
 
+  resources :users
+  
   root :to => 'pages#home'
 # match '/', :to => "pages#home" # can user link_to 'name shown', home_path the namving convention is  controller_name#action
 # match '/home', :to => "pages#home" # the namving convention is  controller_name#action
@@ -8,11 +10,11 @@ SampleApp::Application.routes.draw do
   match '/help',    :to => "pages#help" # the namving convention is  controller_name#action   
   match '/signup',  :to => "users#new" 
 
-  resources :users
+  
 
   get "pages/home"
   
-  get "pages/contact"
+  get "pages/contact" 
   
   get "pages/about"
   
