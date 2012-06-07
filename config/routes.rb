@@ -1,5 +1,7 @@
 SampleApp::Application.routes.draw do
 
+  resources :sessions, :only => [:new, :create, :destory] # restrict access to these three methods only
+
   resources :users
   
   root :to => 'pages#home'
@@ -10,7 +12,8 @@ SampleApp::Application.routes.draw do
   match '/help',    :to => "pages#help" # the namving convention is  controller_name#action   
   match '/signup',  :to => "users#new" 
 
-  
+  match '/signin',  :to => "sessions#new"
+  match '/signout',  :to => "sessions#destory"  
 
   get "pages/home"
   
