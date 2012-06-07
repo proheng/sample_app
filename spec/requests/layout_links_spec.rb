@@ -31,7 +31,7 @@ describe "LayoutLinks" do
     end
   
     it "should have a Signup page at '/signup'" do
-      get '/signup'
+      visit signup_path  # get '/signup' is alternative 
       response.should have_selector 'title', :content => "Sign Up"
     end
     

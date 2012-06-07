@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessor	:password,:password_confirmation		#normal ruby class attribute not belong to ActiveRecord
+	attr_accessor	:password#,:password_confirmation		#normal ruby class attribute not belong to ActiveRecord
 	attr_accessible :email, :name, :password, :password_confirmation
 	#NB: the :password and :password_confirmation are put in attr_accessor for Rspec user_spec.rb testing
 	#NB: attr_accessible in rails Active Record http://stackoverflow.com/questions/1789996/attr-accessible-in-rails-active-record
@@ -13,9 +13,10 @@ class User < ActiveRecord::Base
     					:uniqueness => { :case_sensitive => false }
  
 	validates :password, :presence	=> true,
-						 :confirmation	=> true, #with this field, rails will create a extra field can {field_name}_confirmation. In this case, it created password_confirmation
+						 :confirmation	=> true, #with this field, rails will create a extra field can {field_name}_confirmation under attr_accessor. In this case, it created password_confirmation
 					 	 :length => { :in => 6..40 } #with range
 
+	
 	before_save :encrypt_password #the callback method, calling on a method called encrypted_password 
 
 	def self.authenticate email, submitted_password 
@@ -39,7 +40,7 @@ class User < ActiveRecord::Base
 
 	private
 		def encrypt_password
-			self.salt 				= make_salt if new_record? #if it is new record
+			self.salt               = make_salt if new_record? #if it is new record
 			self.encrypted_password = encrypt(self.password) # keyword self, call upon the method or variable inside the class 
 		end
 

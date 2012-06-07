@@ -7,7 +7,23 @@ class UsersController < ApplicationController
   end
   
   def new
-    @title = "Sign Up"
+	@user  = User.new
+	@title = "Sign Up"
   end
 
+  def create
+  	# raise params[:user].inspect #var_dump();exit;
+  	@user = User.new params[:user]
+  	if @user.save
+  		#Handle a successful save.
+      # flash[:success] = "Welcome to the sample app"
+      redirect_to user_path(@user) , :flash =>  { :success => "Welcome to the sample app" }
+      #!!!CANNOT render here!
+      #There is an important difference between render and redirect_to: render will tell Rails what view it should use (with the same parameters you may have already sent) but redirect_to sends a new request to the browser.
+      #http://en.wikibooks.org/wiki/Ruby_on_Rails/ActionView/Rendering_and_Redirecting
+  	else
+		  @title = "Sign Up"
+	  	render 'new'
+  	end
+  end
 end
