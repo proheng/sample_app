@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
 	
 	before_save :encrypt_password #the callback method, calling on a method called encrypted_password 
 
-	def self.authenticate email, submitted_password 
-		# or can be call User.authenticate !!!!!! 
+	def User.authenticate email, submitted_password 
+		# or can be call self.authenticate !!!!!! 
 		#self.method_name means the method is class methods not instance methdos. !!!! 
 		#different from self.variable_name is instance variable
 		#alternatively, can put class method as following, class level methods
@@ -30,12 +30,19 @@ class User < ActiveRecord::Base
 		##end
 		
 		user = find_by_email email
-		return nil if user.nil?
-		return user if user.has_password? submitted_password
+		(user && user.has_password?(submitted_password))? user : nil
+
+		# return nil if user.nil?
+		# return user if user.has_password? submitted_password
 	end
 
 	def has_password? submitted_password
 		self.encrypted_password == encrypt(submitted_password)
+	end
+
+	def User.authenticate_with_salt id , cookie_salt
+		user = User.find_by_id(id)
+		(user && user.salt == cookie_salt )? user : nil
 	end
 
 	private

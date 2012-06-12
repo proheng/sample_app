@@ -1,13 +1,14 @@
 <h1>Sign in</h1>
 <p>Find me in app/views/sessions/new.html.erb</p>
-<%= form_for :session, :url => sessions_path do |f| %>
+<%= form_for :session_name, :url => sessions_path, :method => :post do |f| %>
+<!--  form_for :session_name will be populated in all f. tag-->
   <div class="field">
   	<%= f.label :email %><br/>
   	<%= f.text_field :email %>
   </div>
   <div class="field">
   	<%= f.label :password %><br/>
-  	<%= f.text_field :password %>
+  	<%= f.text_field :password , :type => :password %>
   </div>
   <div class="actions">
   	<%= f.submit :value=>"Sign In Now", :name => "submit" %>

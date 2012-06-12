@@ -1,9 +1,21 @@
 class UsersController < ApplicationController
 
   def show
-  	@user_controller = User.find_by_id params[:id] # params is http request data 
-  	#for debug on params, refer to application.html.erb
-  	@title = @user_controller.name
+    
+    	@user_controller = User.find_by_id params[:id] # params is http request data 
+    	#for debug on params, refer to application.html.erb
+    	@title = @user_controller.name
+      
+      if(!signed_in?)
+        redirect_to signin_path, :notice => "Please login."
+        return 
+      end
+
+      if  @user_controller != current_user
+        redirect_to user_path(current_user), :notice => "You have no permission."
+        return
+      end
+    
   end
   
   def new
@@ -15,6 +27,7 @@ class UsersController < ApplicationController
   	# raise params[:user].inspect #var_dump();exit;
   	@user = User.new params[:user]
   	if @user.save
+      sign_in @user
   		#Handle a successful save.
       # flash[:success] = "Welcome to the sample app"
       redirect_to user_path(@user) , :flash =>  { :success => "Welcome to the sample app" }
