@@ -18,7 +18,8 @@ class SessionsController < ApplicationController
   	else
   		#Handle successfully sign in
       sign_in user
-      redirect_to user
+      redirect_to_back_or user
+      clear_return_to
   	end
   	
   end

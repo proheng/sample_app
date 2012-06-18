@@ -11,6 +11,8 @@ gem 'gravatar_image_tag'
 group :development do 
 	gem 'rspec-rails'
 	gem 'annotate', '2.4.1.beta1'
+	gem 'faker'
+	gem "will_paginate", "~> 3.0.3"
 end
 
 group :test do

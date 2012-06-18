@@ -1,0 +1,19 @@
+<%= render 'shared/error_messages' %> <!-- This is only working with active record-->
+
+<div class="field">
+	<%= user_field.label 		:name %>
+	<%= user_field.text_field 	:name %>
+</div>
+<div class="field">
+	<%= user_field.label 		:email %>
+	<%= user_field.text_field 	:email , :type=>'email'%>
+</div>
+<div class="field">
+	<%= user_field.label 			:password %>
+	<!-- #password is filtered according to config/application.rb  -->
+	<%= user_field.password_field 	:password %>
+</div>
+<div class="field">
+	<%= user_field.label 		:password_confirmation, "Confirmation" %>
+	<%= user_field.password_field 	:password_confirmation %>
+</div>

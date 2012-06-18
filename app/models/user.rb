@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 	
 	before_save :encrypt_password #the callback method, calling on a method called encrypted_password 
 
+	self.per_page = 15 # equivalent to @per_page = 15
+
 	def User.authenticate email, submitted_password 
 		# or can be call self.authenticate !!!!!! 
 		#self.method_name means the method is class methods not instance methdos. !!!! 

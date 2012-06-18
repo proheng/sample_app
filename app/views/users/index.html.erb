@@ -1,0 +1,16 @@
+<h1>All users</h1>
+<%= will_paginate @users_result %>
+<ul class="users">
+	
+	<%= render @users_result  %>
+	<!-- # Since it is user class, it find _user.html.erb -->
+<!-- 
+	The above two lines are equivalent to following 
+	<% @users_result.each do |user|  %>
+		<li>
+			<%= gravatar_for user %>
+			<%= link_to user.name, user %>
+		</li>
+	<% end %> -->
+</ul>
+<%= will_paginate @users_result %>

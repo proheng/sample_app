@@ -1,26 +1,35 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update]  # protect user edit page from unauthenticated page
+  before_filter :correct_user, :only => [:edit, :update]
+
+  def index
+    # WillPaginate.per_page = 10
+    @users_result = User.paginate(:page => params[:page])
+  end
 
   def show
     
     	@user_controller = User.find_by_id params[:id] # params is http request data 
     	#for debug on params, refer to application.html.erb
-    	@title = @user_controller.name
+    	  
+      redirect_to user_path(current_user) unless @user_controller
       
-      if(!signed_in?)
-        redirect_to signin_path, :notice => "Please login."
-        return 
-      end
 
-      if  @user_controller != current_user
-        redirect_to user_path(current_user), :notice => "You have no permission."
-        return
-      end
-    
+      @title = @user_controller.name
+     
+      # if  @user_controller != current_user
+      #   redirect_to user_path(current_user), :notice => "You have no permission."
+      #   return
+      # end   
   end
   
   def new
-	@user  = User.new
-	@title = "Sign Up"
+    if signed_in?
+      redirect_to edit_user_path(current_user), :notice => "Please sign out befoer signing up"
+    else
+    	@user  = User.new
+    	@title = "Sign Up"
+    end
   end
 
   def create
@@ -39,4 +48,37 @@ class UsersController < ApplicationController
 	  	render 'new'
   	end
   end
+
+  def edit
+    @title = "Edit User Profile"
+    if signed_in? 
+      @user = User.find_by_id(params[:id])
+      # if current_user != @user
+      #   redirect_to edit_user_path(current_user.id) , :notice => "You don't have permission to edit this user."
+      # end
+    else
+      redirect_to signin_path, :notice => "Please login." 
+    end 
+  end
+
+  def update
+    @user = User.find_by_id(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to user_path(@user.id), :notice => "Update success"
+    else
+      flash.now[:error] = "Update Fails";
+      render :edit
+    end
+  end
+
+  private 
+    def authenticate
+      deny_access  unless signed_in? 
+    end
+
+    def correct_user
+      @user = User.find_by_id(params[:id])
+      redirect_to root_path unless @user == current_user
+    end
+
 end
