@@ -3,7 +3,7 @@
 <ul class="users">
 	
 	<%= render @users_result  %>
-	<!-- # Since it is user class, it find _user.html.erb -->
+	<!-- # Since it is user class, it find _user.html.erb and passing user variable in block-->
 <!-- 
 	The above two lines are equivalent to following 
 	<% @users_result.each do |user|  %>
@@ -11,6 +11,12 @@
 			<%= gravatar_for user %>
 			<%= link_to user.name, user %>
 		</li>
-	<% end %> -->
+	<% end %> 
+-->
+
+<!-- 	<% @users_result.each do |u|  %>
+		<%= render 'user.html.erb', :user => u %>
+	<% end %>
+ -->
 </ul>
 <%= will_paginate @users_result %>

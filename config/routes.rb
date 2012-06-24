@@ -3,6 +3,7 @@ SampleApp::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destory] # restrict access to these three methods only
 
   resources :users
+  resources :microposts, :only => [:create, :destory]
   
   root :to => 'pages#home'
 # match '/', :to => "pages#home" # can user link_to 'name shown', home_path the namving convention is  controller_name#action

@@ -6,6 +6,17 @@
 				<%= @user_controller.name %>
 			</h1>
 		</td>
+
+		<% if @microposts.any?  %>
+			<%= will_paginate @microposts %>
+				<table class="microposts" >
+					<%= render @microposts %>
+
+				</table>
+			<%= will_paginate @microposts %>
+		<% end %>
+
+
 		<td class="sidebar round"> 
 			<strong>
 				Fulll Name <%= @user_controller.email %>  		
@@ -16,6 +27,9 @@
 
 				<%= link_to user_path(@user_controller.id) %>
 				<%= link_to user_path(@user_controller) %> 
+			</strong>
+			<strong>
+				Micropost: <%= @microposts.count %>
 			</strong>
 		</td>
 	</tr>

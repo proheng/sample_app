@@ -28,6 +28,14 @@ module SessionsHelper
 		puts @current_user.inspect
 		# raise current_user
 	end
+	def correct_user
+      @user = User.find_by_id(params[:id])
+      redirect_to root_path unless @user == current_user
+    end
+
+    def authenticate
+      deny_access  unless signed_in? 
+    end
 
     def deny_access
     	store_location
@@ -50,6 +58,9 @@ module SessionsHelper
 	private
 		def user_from_remember_token
 			User.authenticate_with_salt *remember_token # * round the array 
+				# To illustrate, the following two statements are equal:
+				# method arg1, arg2, arg3
+				# method *[arg1, arg2, arg3]
 		end
 		def remember_token
 			cookies.signed[:remember_token] || [nil,nil]

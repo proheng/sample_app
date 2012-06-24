@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]  # protect user edit page from unauthenticated page
+  before_filter :authenticate, :only => [:edit, :update, :index]  # protect user edit page from unauthenticated page
   before_filter :correct_user, :only => [:edit, :update]
+  before_filter :admin_user ,  :only => :destroy
 
   def index
     # WillPaginate.per_page = 10
@@ -13,8 +14,9 @@ class UsersController < ApplicationController
     	#for debug on params, refer to application.html.erb
     	  
       redirect_to user_path(current_user) unless @user_controller
-      
 
+      @microposts = @user_controller.microposts.paginate(:page => params[:page])
+      
       @title = @user_controller.name
      
       # if  @user_controller != current_user
@@ -71,14 +73,20 @@ class UsersController < ApplicationController
     end
   end
 
-  private 
-    def authenticate
-      deny_access  unless signed_in? 
-    end
+  def destroy
+    @user.destroy
+    flash[:success] = "User destory"
+    redirect_to users_path
+  end
 
-    def correct_user
+  private 
+
+
+   
+
+    def admin_user
+      redirect_to root_path unless current_user.admin?
       @user = User.find_by_id(params[:id])
-      redirect_to root_path unless @user == current_user
     end
 
 end

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 	#NB: the :password and :password_confirmation are put in attr_accessor for Rspec user_spec.rb testing
 	#NB: attr_accessible in rails Active Record http://stackoverflow.com/questions/1789996/attr-accessible-in-rails-active-record
 
+	has_many	:microposts, :dependent => :destroy #make sure micropost will be remove on deleting user.
+
 	validates :name, 	:presence => true,
 						:length	  => { :maximum => 50 }
 
@@ -15,6 +17,7 @@ class User < ActiveRecord::Base
 	validates :password, :presence	=> true,
 						 :confirmation	=> true, #with this field, rails will create a extra field can {field_name}_confirmation under attr_accessor. In this case, it created password_confirmation
 					 	 :length => { :in => 6..40 } #with range
+
 
 	
 	before_save :encrypt_password #the callback method, calling on a method called encrypted_password 
@@ -76,5 +79,6 @@ end
 #  updated_at         :datetime        not null
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean         default(FALSE)
 #
 
